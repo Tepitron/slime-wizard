@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwch5adycw6tr"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tsywe"]
+
+[node name="Teleporter" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_tsywe")

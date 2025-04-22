@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://uttcsv3cus8w"]
+
+[ext_resource type="Script" uid="uid://b31kk60vgpq3k" path="res://scripts/door.gd" id="1_83dcw"]
+[ext_resource type="Texture2D" uid="uid://bfmvg2q0e3n33" path="res://assets/sprites/door.png" id="1_hpvv5"]
+[ext_resource type="FontFile" uid="uid://dglsv3n7xkwgm" path="res://assets/fonts/PixelOperator8.ttf" id="2_uvdjg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvdjg"]
+size = Vector2(20, 31)
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_83dcw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_uvdjg")
+
+[node name="Door" type="Sprite2D" parent="."]
+texture = ExtResource("1_hpvv5")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -28.0
+offset_top = -26.0
+offset_right = 24.0
+offset_bottom = -15.0
+theme_override_fonts/font = ExtResource("2_uvdjg")
+theme_override_font_sizes/font_size = 8
+text = "Level"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

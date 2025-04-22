@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=4 uid="uid://67avxh2knwop"]
+
+[ext_resource type="PackedScene" uid="uid://xuflmoo4xn8a" path="res://scenes/player.tscn" id="1_ksju7"]
+[ext_resource type="Script" uid="uid://b6846ttg2xgj7" path="res://scripts/level_1.gd" id="1_x42e6"]
+[ext_resource type="PackedScene" uid="uid://cqlxivvysd24f" path="res://scenes/tile_map_layer.tscn" id="2_6iamk"]
+[ext_resource type="PackedScene" uid="uid://cwch5adycw6tr" path="res://scenes/teleporter.tscn" id="3_nsrm0"]
+[ext_resource type="PackedScene" uid="uid://b5lyatbwqgl0k" path="res://scenes/enemy.tscn" id="5_6761a"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_x42e6")
+
+[node name="Player" parent="." instance=ExtResource("1_ksju7")]
+position = Vector2(8, 1)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(184, 1)
+zoom = Vector2(2.5, 2.5)
+
+[node name="TileMapLayer" parent="." instance=ExtResource("2_6iamk")]
+position = Vector2(430.61, 28.15)
+tile_map_data = PackedByteArray("AADi/wIAAAAAAAAAAADj/wIAAAAAAAAAAADk/wIAAAAAAAAAAADl/wIAAAAAAAAAAADm/wIAAAAAAAAAAADn/wIAAAAAAAAAAADo/wIAAAAAAAAAAADp/wIAAAAAAAAAAADq/wIAAAAAAAAAAADr/wIAAAAAAAAAAADs/wIAAAAAAAAAAADt/wIAAAAAAAAAAADu/wIAAAAAAAAAAADv/wIAAAAAAAAAAADw/wIAAAAAAAAAAADx/wIAAAAAAAAAAADy/wIAAAAAAAAAAADz/wIAAAAAAAAAAAD0/wIAAAAAAAAAAAD1/wIAAAAAAAAAAAD2/wIAAAAAAAAAAAD3/wIAAAAAAAAAAAD4/wIAAAAAAAAAAAD5/wIAAAAAAAAAAAD6/wIAAAAAAAAAAAD7/wIAAAAAAAAAAAD8/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAANAAIAAAAAAAAAAAAOAAIAAAAAAAAAAAAPAAIAAAAAAAAAAAAQAAIAAAAAAAAAAAARAAIAAAAAAAAAAAASAAIAAAAAAAAAAAATAAIAAAAAAAAAAAAVAAIAAAAAAAAAAAAUAAIAAAAAAAAAAAAWAAIAAAAAAAAAAAAXAAIAAAAAAAAAAAAYAAIAAAAAAAAAAAAZAAIAAAAAAAAAAAAaAAIAAAAAAAAAAAAbAAIAAAAAAAAAAAAcAAIAAAAAAAAAAAAdAAIAAAAAAAAAAAAeAAIAAAAAAAAAAAAfAAIAAAAAAAAAAAAgAAIAAAAAAAAAAAAhAAIAAAAAAAAAAAAiAAIAAAAAAAAAAAAjAAIAAAAAAAAAAAAkAAIAAAAAAAAAAAAlAAIAAAAAAAAAAAAmAAIAAAAAAAAAAAAnAAIAAAAAAAAAAAAoAAIAAAAAAAAAAAApAAIAAAAAAAAAAAAqAAIAAAAAAAAAAAArAAIAAAAAAAAAAAAsAAIAAAAAAAAAAAAtAAIAAAAAAAAAAAA=")
+
+[node name="Teleporter" parent="." instance=ExtResource("3_nsrm0")]
+position = Vector2(1147, 22)
+rotation = -1.5708
+
+[node name="StartingPoint" type="Marker2D" parent="."]
+position = Vector2(-2, 53)
+
+[node name="Enemy" parent="." instance=ExtResource("5_6761a")]
+position = Vector2(655, 45)
+
+[node name="EnemySpawnerTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="Teleporter" to="." method="_on_teleporter_body_entered"]
