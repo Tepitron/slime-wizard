@@ -11,11 +11,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xasec")
 
-[node name="SpinBox" type="SpinBox" parent="."]
+[node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_right = 87.0
+offset_left = 98.0
+offset_right = 209.0
 offset_bottom = 33.0
-rounded = true
-alignment = 2
-
-[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]

@@ -7,6 +7,7 @@
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_x42e6")
+metadata/_edit_horizontal_guides_ = [-99.0]
 
 [node name="Player" parent="." instance=ExtResource("1_ksju7")]
 position = Vector2(8, 1)
@@ -26,11 +27,18 @@ rotation = -1.5708
 [node name="StartingPoint" type="Marker2D" parent="."]
 position = Vector2(-2, 53)
 
-[node name="EnemySpawnerTimer" type="Timer" parent="."]
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="BasicEnemySpawnerTimer" type="Timer" parent="Timers"]
 wait_time = 5.0
 autostart = true
 
-[node name="Enemies" type="Node" parent="."]
+[node name="FlyingEyeballSpawnerTimer" type="Timer" parent="Timers"]
+wait_time = 10.0
+autostart = true
 
 [connection signal="body_entered" from="Teleporter" to="." method="_on_teleporter_body_entered"]
-[connection signal="timeout" from="EnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
+[connection signal="timeout" from="Timers/BasicEnemySpawnerTimer" to="." method="_on_basic_enemy_spawner_timer_timeout"]
+[connection signal="timeout" from="Timers/FlyingEyeballSpawnerTimer" to="." method="_on_flying_eyeball_spawner_timer_timeout"]

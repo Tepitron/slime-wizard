@@ -1,3 +1,5 @@
+#Displays text when the player is in range
+
 extends Area2D
 
 var is_player_in_range = false

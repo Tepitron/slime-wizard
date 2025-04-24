@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://npw5325belx2"]
+
+[ext_resource type="Texture2D" uid="uid://c66hn5dub3njo" path="res://assets/sprites/flying_eyeball.png" id="1_b2eph"]
+[ext_resource type="Script" uid="uid://b46wsp8gde1e" path="res://scripts/flying_eyeball.gd" id="1_crmr1"]
+[ext_resource type="Texture2D" uid="uid://dty8dwhvi3737" path="res://assets/sprites/enemy.png" id="2_b1hrs"]
+[ext_resource type="FontFile" uid="uid://dglsv3n7xkwgm" path="res://assets/fonts/PixelOperator8.ttf" id="4_8lpct"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lpct"]
+atlas = ExtResource("2_b1hrs")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tot4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lpct")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b2eph")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b2eph"]
+radius = 14.0357
+
+[node name="FlyingEyeball" type="AnimatableBody2D"]
+script = ExtResource("1_crmr1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tot4b")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b2eph")
+
+[node name="Solution" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -41.0
+offset_right = 20.0
+offset_bottom = -18.0
+theme_override_fonts/font = ExtResource("4_8lpct")
+theme_override_font_sizes/font_size = 8
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
